@@ -1,0 +1,27 @@
+syntax = "proto3";
+package orbit.api;
+
+import "packages/core/proto/ActionLogID.proto";
+import "packages/core/proto/ActionLog.proto";
+
+message GetActionLogsQuery {
+  int32 limit = 1;
+  orbit.core.ActionLogID id = 2;
+}
+
+message GetActionLogsResponse {
+  enum ObjectType {
+    actionLog = 0;
+  }
+  ObjectType objectType = 1;
+  orbit.core.ActionLogID id = 2;
+  orbit.core.ActionLog data = 3;
+}
+
+message GetActionLogs {
+  GetActionLogsQuery query = 1;
+}
+
+message ActionLogsHTTP {
+  GetActionLogs GET = 1;
+}

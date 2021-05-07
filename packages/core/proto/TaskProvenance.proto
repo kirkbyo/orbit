@@ -1,0 +1,13 @@
+syntax = "proto3";
+package orbit.core;
+
+import "packages/core/proto/PromptProvenance.proto";
+
+message TaskProvenance {
+  PromptProvenanceType provenanceType = 1;
+  // A unique identifier which specifies the source of this task relative to the provenanceType. For instance, for a task imported from Anki, this would be the Anki card ID.
+  string externalID = 2;
+  optional float modificationTimestampMillis = 3;
+  optional string title = 4;
+  optional string url = 5;
+}

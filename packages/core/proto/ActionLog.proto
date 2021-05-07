@@ -1,0 +1,34 @@
+syntax = "proto3";
+package orbit.core;
+
+import "packages/core/proto/TaskProvenance.proto";
+import "packages/core/proto/ActionLogID.proto";
+
+message IngestActionLog {
+  enum ActionLogType {
+    ingest = 0;
+  }
+  float timestampMillis = 1;
+  string taskID = 2;
+  ActionLogType actionLogType = 3;
+  optional TaskProvenance provenance = 4;
+}
+
+message RescheduleActionLog {
+  enum ActionLogType {
+    reschedule = 0;
+  }
+  float timestampMillis = 1;
+  string taskID = 2;
+  ActionLogType actionLogType = 3;
+  repeated ActionLogID parentActionLogIDs = 4;
+  float newTimestampMillis = 5;
+}
+
+message ActionLog {
+  oneof action {
+    IngestActionLog ingest = 1;
+    RescheduleActionLog reschedule = 2;
+  } 
+}
+
