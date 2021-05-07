@@ -1,0 +1,9 @@
+{
+  "title": "Base Response List",
+  "properties": {
+    "objectType": { "const": "list" },
+    "hasMore": { "type": "boolean" }
+  },
+  "required": ["objectType", "hasMore"],
+  "additionalProperties": false
+}

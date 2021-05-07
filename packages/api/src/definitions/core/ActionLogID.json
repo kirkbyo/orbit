@@ -1,0 +1,14 @@
+{
+  "title": "Action Log ID",
+  "allOf": [
+    { "type": "string" },
+    { 
+      "type": "object",
+      "properties": {
+        "__actionLogIDOpaqueType": { "type": "null" }
+      },
+      "required": ["__actionLogIDOpaqueType"],
+      "additionalProperties": false
+    }
+  ]
+}

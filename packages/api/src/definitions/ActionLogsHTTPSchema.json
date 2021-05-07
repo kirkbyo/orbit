@@ -1,0 +1,64 @@
+{
+  "title": "Action Log HTTP Schema",
+  "properties": {
+    "GET": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "limit": { "type": "integer" },
+            "createdAfterID": { "$ref": "core/ActionLogID.json" }
+          },
+          "additionalProperties": false
+        },
+        "response": {
+          "allOf": [
+            { "$ref": "shared/BaseResponseList.json"},
+            {
+              "type": "object",
+              "properties": {
+                "data": { 
+                  "type": "object",
+                  "properties": {
+                    "objectType": { "const": "actionLog" },
+                    "id": { "$ref": "core/ActionLogID.json" },
+                    "data": { "$ref": "core/ActionLog.json" }
+                  },
+                  "required": ["objectType", "id", "data"],
+                  "additionalProperties": false
+                }
+              },
+              "required": ["data"],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": ["query", "response"],
+      "additionalProperties": false
+    },
+    "PATCH": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "$ref": "core/ActionLogID.json" },
+              "data": { "$ref": "core/ActionLog.json" }
+            },
+            "required": ["id", "data"],
+            "additionalProperties": false
+          }
+        },
+        "response": { "type": "null" }
+      },
+      "required": ["body", "response"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["GET", "PATCH"],
+  "additionalProperties": false
+}

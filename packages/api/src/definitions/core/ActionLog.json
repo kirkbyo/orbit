@@ -1,0 +1,75 @@
+{
+  "title": "Action Log",
+  "oneOf": [
+    {
+      "title": "Ingest Action Log",
+      "type": "object",
+      "properties": {
+        "timestampMillis": { "type": "number" },
+        "taskID": { "type": "string" },
+        "actionLogType": { "const": "ingest" },
+        "provenance": {
+          "oneOf": [
+            { "$ref": "TaskProvenance.json" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "required": ["timestampMillis", "taskID", "actionLogType", "provenance"],
+      "additionalProperties": false
+    },
+    {
+      "title": "Repetition Action Log",
+      "type": "object",
+      "properties": {
+        "timestampMillis": { "type": "number" },
+        "taskID": { "type": "string" },
+        "actionLogType": { "const": "repetition" },
+        "taskParameters": { "type": ["object", "number", "null"] },
+        "outcome": { "type": "string" },
+        "context": { "type": ["string", "null"] }
+      },
+      "required": ["timestampMillis", "taskID", "actionLogType", "taskParameters", "outcome", "context"],
+      "additionalProperties": false
+    },
+    {
+      "title": "Reschedule Action Log",
+      "type": "object",
+      "properties": {
+        "timestampMillis": { "type": "number" },
+        "taskID": { "type": "string" },
+        "actionLogType": { "const": "reschedule" },
+        "parentActionLogIDs": {
+          "type": "array",
+          "items": { "$ref": "ActionLogID.json" }
+        },
+        "newTimestampMillis": { "type": "number" }
+      },
+      "required": ["timestampMillis", "taskID", "actionLogType", "parentActionLogIDs", "newTimestampMillis"],
+      "additionalProperties": false
+    },
+    {
+      "title": "Update Metadata Action Log",
+      "type": "object",
+      "properties": {
+        "timestampMillis": { "type": "number" },
+        "taskID": { "type": "string" },
+        "actionLogType": { "const": "reschedule" },
+        "parentActionLogIDs": {
+          "type": "array",
+          "items": { "$ref": "ActionLogID.json" }
+        },
+        "updates": {
+          "type": "object",
+          "properties": {
+            "isDeleted": { "type": "boolean" },
+            "provenance": { "$ref": "TaskProvenance.json" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["timestampMillis", "taskID", "actionLogType", "parentActionLogIDs", "updates"],
+      "additionalProperties": false
+    }
+  ]
+}

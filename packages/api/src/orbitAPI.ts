@@ -30,21 +30,6 @@ export type Spec = {
     };
   };
 
-  "/actionLogs": {
-    GET: {
-      query: {
-        limit?: number;
-        createdAfterID?: ActionLogID;
-      };
-      response: ResponseList<"actionLog", ActionLogID, ActionLog>;
-    };
-
-    PATCH: {
-      body: { id: ActionLogID; data: ActionLog }[];
-      response: void;
-    };
-  };
-
   "/taskData": {
     GET: {
       query: { ids: PromptID[] };

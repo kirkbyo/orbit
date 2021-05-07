@@ -1,0 +1,15 @@
+{
+  "title": "Task Provenance",
+  "properties": {
+    "provenanceType": { "enum": ["anki", "web", "note"] },
+    "externalID": { 
+      "description": "A unique identifier which specifies the source of this task relative to the provenanceType. For instance, for a task imported from Anki, this would be the Anki card ID.",
+      "type": "string"
+    },
+    "modificationTimestampMillis": { "type": ["number", "null"] },
+    "title": { "type": ["string", "null"] },
+    "url": { "type": ["string", "null"] }
+  },
+  "required": ["provenanceType", "externalID", "modificationTimestampMillis", "title", "url"],
+  "additionalProperties": false
+}

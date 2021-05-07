@@ -8,7 +8,9 @@
   "scripts": {
     "build": "tsc -b"
   },
-  "dependencies": {},
+  "dependencies": {
+    "json-schema-to-typescript": "^10.1.4"
+  },
   "devDependencies": {
     "typescript": "^4.0.5"
   }
